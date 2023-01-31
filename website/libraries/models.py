@@ -19,22 +19,27 @@ MAX_IMAGE_HEIGHT = API_LIMITS["image_height"]
 class Image(BaseModel):
     """The Image class defines the input data to create a new
     placeholder image."""
-    width: int # Image width in pixels
-    height: int # Image height in pixels
-    text: str = None # Image text
-    background_color: str = DEFAULT_BACKGROUND_COLOR # Image color
-    text_color: str = DEFAULT_TEXT_COLOR # Text color
+
+    width: int  # Image width in pixels
+    height: int  # Image height in pixels
+    text: str = None  # Image text
+    background_color: str = DEFAULT_BACKGROUND_COLOR  # Image color
+    text_color: str = DEFAULT_TEXT_COLOR  # Text color
 
     @validator("width")
     def width_is_within_range(cls, value):
         """Validates that the image width is within the allowed range"""
-        assert 0 < value < MAX_IMAGE_WIDTH, f"Image width not in allowed range 0-{MAX_IMAGE_WIDTH}."
+        assert (
+            0 < value < MAX_IMAGE_WIDTH
+        ), f"Image width not in allowed range 0-{MAX_IMAGE_WIDTH}."
         return value
 
     @validator("height")
     def height_is_within_range(cls, value):
         """Validates that the image width is within the allowed range"""
-        assert 0 < value < MAX_IMAGE_HEIGHT, f"Image height not in allowed range 0-{MAX_IMAGE_HEIGHT}."
+        assert (
+            0 < value < MAX_IMAGE_HEIGHT
+        ), f"Image height not in allowed range 0-{MAX_IMAGE_HEIGHT}."
         return value
 
     @validator("background_color", "text_color", pre=True, always=True)

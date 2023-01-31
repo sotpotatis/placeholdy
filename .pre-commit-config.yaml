@@ -12,4 +12,4 @@ repos:
   rev: stable
   hooks:
       - id: black
-        types: [python3]
+        files: website/

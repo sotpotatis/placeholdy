@@ -4,7 +4,8 @@ import requests, logging
 
 logger = logging.getLogger(__name__)
 
-def download_pico_css(destination_path:str):
+
+def download_pico_css(destination_path: str):
     """Downloads the picocss.min.css file and places it into the
     set path.
 

@@ -4,6 +4,7 @@ from flask import Blueprint, request, send_from_directory
 from pydantic import ValidationError
 from http import HTTPStatus
 import logging
+
 # Internal libraries
 from libraries.configuration_file import get_configuration_file
 from libraries.image_creator import PlaceholderImageCreator
@@ -29,8 +30,9 @@ image_creator = PlaceholderImageCreator(
     use_cache=ENABLE_CACHING,
     image_font=IMAGE_FONT,
     cache_directory=CACHING_DIRECTORY,
-    cache_format=CACHE_FORMAT
+    cache_format=CACHE_FORMAT,
 )
+
 
 def generate_error_response(error_message):
     """Creates an error image with the error message being
@@ -40,9 +42,10 @@ def generate_error_response(error_message):
         height=512,
         text=error_message,
         background_color=ERROR_IMAGE_BACKGROUND_COLOR,
-        text_color=ERROR_IMAGE_TEXT_COLOR
+        text_color=ERROR_IMAGE_TEXT_COLOR,
     )
     return image_creator.create_image(error_image)
+
 
 @api.route("/placeholder")
 def return_placeholder():
@@ -58,7 +61,9 @@ def return_placeholder():
         image = None
         try:
             image = Image(**request.args)
-            logger.info("Got a request to /placeholder with valid args. Creating image...")
+            logger.info(
+                "Got a request to /placeholder with valid args. Creating image..."
+            )
             image_filepath = image_creator.create_image(image)
             logger.info("Image created.")
         except ValidationError as e:
@@ -66,6 +71,8 @@ def return_placeholder():
             error_message = f"""Validation errors: \n{e}.\nRefer to the documentation for further help."""
             image_filepath = generate_error_response(error_message)
     else:
-        image_filepath = generate_error_response("No arguments passed. Refer to the documentation for further help.")
+        image_filepath = generate_error_response(
+            "No arguments passed. Refer to the documentation for further help."
+        )
     logger.info(f"Returning image {image_filepath} to user...")
     return send_from_directory(CACHING_DIRECTORY, image_filepath)
