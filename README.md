@@ -30,7 +30,8 @@ the image generation library PIL.
 
 ### Documentation
 
-The documentation is hosted by the Flask server that is running the script.
+The documentation is hosted by the Flask server that is running the script. It is made using [Pico CSS](https://picocss.com/),
+a new CSS framework I tried and was quite happy with.
 
 ## Installation
 
