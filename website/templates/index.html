@@ -1,0 +1,52 @@
+{# Set a standardized dimension for demo images. #}
+{% set image_dimensions = 80 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Placeholdy | Generate placeholder images.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Load Pico CSS -->
+    <link rel="stylesheet" href="/pico.min.css"/>
+</head>
+<body>
+<main class="container">
+    <article>
+        <img alt="Example placeholder image." src="/placeholder?width=512&height=512" width="{{ image_dimensions }}" height="{{ image_dimensions }}">
+        <hgroup>
+            <h1>Placeholdy</h1>
+            <h2>Easily generate placeholder images</h2>
+        </hgroup>
+        <p>Placeholdy is a simple tool/website for generating placeholder images. It helps you to embed placeholder images with no hassles.</p>
+        <p><i>Psst... it is customizable: see below!</i></p>
+        <details open>
+            <summary>Minimal working example</summary>
+            <p>When embedding an image, link to <kbd>{{ config.public_url }}/placeholder?width=512&height=512</kbd>...</p>
+            <p>..or in HTML: <kbd>&lt;img&gt; alt="..." src="{{ config.public_url }}/placeholder?width=512&height=512"&lt;/img&gt;</kbd></p>
+            <p>The numbers are in pixels format.</p>
+        </details>
+        <details>
+            <summary>Customizing colors</summary>
+            <p>By adding the URL parameters <kbd>&text_color</kbd> and/or <kbd>&background_color</kbd>, you can customize the color
+                of the placeholder image.</p>
+            <h3>Supported color formats</h3>
+            <p>Placeholdy uses <a href="https://pillow.readthedocs.io">Pillow</a> to generate images under the hood.
+            See <a href="https://pillow.readthedocs.io/en/stable/reference/ImageColor.html#color-names">ImageColor's color names</a>.</p>
+            <p><small><i>Hint:</i> Hex, RGB, and HTML color names are all supported.</small></p>
+            <p><mark>Note:</mark> Remember to escape hex colors in the URL: <kbd>&text_color=<ins>%23</ins>398727</kbd> instead of <kbd>&text_color=<del>#</del>398727</kbd>.
+            </p>
+        </details>
+        <details>
+            <summary>More information</summary>
+            <p>In case of an error, the API will respond with an error image telling you what went wrong. An example (open it in a new page to see a bigger version):</p>
+                <img alt="Demo of the placeholder image generated with invalid data" src="/placeholder?width=-1&height=512&color=nonexistent%20color" width="{{ image_dimensions }}" height="{{ image_dimensions }}">
+            <p>In case of server errors, other unexpected errors, or exhausted rate limits (you requesting too many images), you may not get an image but an error code.</p>
+        </details>
+        <details>
+            <summary>GitHub</summary>
+            <p>This project is open source on <a href="https://github.com/sotpotatis/placeholdy">GitHub</a>.</p>
+        </details>
+    </article>
+</main>
+</body>
+</html>

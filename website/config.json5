@@ -1,0 +1,26 @@
+{
+  "image_font": "fonts/Tuffy-Bold.ttf", // Path to image font
+  "public_url": "https://placeholdy.fly.dev", // Public location to the website without slashes!
+  // Note: I hope to change the public URL to https://placeholdy.albins.website soon!
+  "request_limit": { // Request limit settings
+    "enabled": true,
+    "limits": ["1000/minute", "10000/day"]
+  },
+  "logging_level": "debug",
+  "cors": { // CORS settings
+    "enabled": true,
+    "allowed_origins": "*"
+  },
+  "api_defaults": {
+    "background_color": "RGB(150,150,150)", // Image background color
+    "text_color": "RGB(100,100,100)", // Text background color
+    // Error image settings. On most errors, an image is returned
+    // with the error message.
+    "error_background_color": "#e3a6a6", // Background for error images
+    "error_text_color": "#753636" // Text color for error images
+  },
+  "api_limits": {
+    "image_width": 5000, // Max width of a requested image
+    "image_height": 5000 // Max height of a requested image
+  }
+}
